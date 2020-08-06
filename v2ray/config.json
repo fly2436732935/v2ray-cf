@@ -12,7 +12,10 @@
         ]
       },
       "streamSettings": {
-        "network":"ws"
+        "network":"tcp",
+        "tcpSettings": {
+          "type": "http"
+        }
       }
     }
   ],

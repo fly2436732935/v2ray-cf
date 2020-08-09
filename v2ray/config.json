@@ -1,81 +1,73 @@
 {
-  "inbounds": [
-    {
-      "port": 8080,
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "8c35bef3-d51f-41ab-ac87-7b053410495b",
-            "alterId": 64
-          }
-        ]
-      },
-      "streamSettings": {
-				"network": "tcp",
-				"tcpSettings": {
-					"header": {
-						"type": "http",
-						"response": {
-							"version": "1.1",
-							"status": "200",
-							"reason": "OK",
-							"headers": {
-								"Content-encoding": [
-									"gzip"
-								],
-								"Content-Type": [
-									"text/html; charset=utf-8"
-								],
-								"Cache-Control": [
-									"no-cache"
-								],
-								"Vary": [
-									"Accept-Encoding"
-								],
-								"X-Frame-Options": [
-									"deny"
-								],
-								"X-XSS-Protection": [
-									"1; mode=block"
-								],
-								"X-content-type-options": [
-									"nosniff"
-								]
-							}
+	"inbounds": [{
+		"port": 8080,
+		"protocol": "vmess",
+		"settings": {
+			"clients": [{
+				"id": "8c35bef3-d51f-41ab-ac87-7b053410495b",
+				"alterId": 64
+			}]
+		},
+		"streamSettings": {
+			"network": "tcp",
+			"tcpSettings": {
+				"header": {
+					"type": "http",
+					"response": {
+						"version": "1.1",
+						"status": "200",
+						"reason": "OK",
+						"headers": {
+							"Content-encoding": [
+								"gzip"
+							],
+							"Content-Type": [
+								"text/html; charset=utf-8"
+							],
+							"Cache-Control": [
+								"no-cache"
+							],
+							"Vary": [
+								"Accept-Encoding"
+							],
+							"X-Frame-Options": [
+								"deny"
+							],
+							"X-XSS-Protection": [
+								"1; mode=block"
+							],
+							"X-content-type-options": [
+								"nosniff"
+							]
 						}
 					}
 				}
-			},
-			"sniffing": {
-				"enabled": true,
-				"destOverride": [
-					"http",
-					"tls"
-				]
 			}
-    }
-  ],
-  outbounds": [
-		{
+		},
+		"sniffing": {
+			"enabled": true,
+			"destOverride": [
+				"http",
+				"tls"
+			]
+		}
+	}],
+	"outbounds ": [{
 			"protocol": "freedom",
 			"settings": {
 				"domainStrategy": "UseIP"
 			},
 			"tag": "direct"
-		},
-		{
+		}, {
 			"protocol": "blackhole",
 			"settings": {},
 			"tag": "blocked"
-        },
-		{
+		}, {
 			"protocol": "mtproto",
 			"settings": {},
 			"tag": "tg-out"
 		}
-		//include_out_config
-		//
+
 	],
 	"dns": {
 		"servers": [
@@ -89,8 +81,7 @@
 	},
 	"routing": {
 		"domainStrategy": "IPOnDemand",
-		"rules": [
-			{
+		"rules": [{
 				"type": "field",
 				"ip": [
 					"0.0.0.0/8",
@@ -115,8 +106,7 @@
 				"type": "field",
 				"inboundTag": ["tg-in"],
 				"outboundTag": "tg-out"
-			}
-			,
+			},
 			{
 				"type": "field",
 				"domain": [
@@ -146,24 +136,22 @@
 					"domain:shenyun.com"
 				],
 				"outboundTag": "blocked"
-			}			,
-                {
-                    "type": "field",
-                    "protocol": [
-                        "bittorrent"
-                    ],
-                    "outboundTag": "blocked"
-                }
-			//include_ban_ad
-			//include_rules
-			//
+			},
+			{
+				"type": "field",
+				"protocol": [
+					"bittorrent"
+				],
+				"outboundTag": "blocked"
+			}
+
 		]
 	},
 	"transport": {
 		"kcpSettings": {
-            "uplinkCapacity": 100,
-            "downlinkCapacity": 100,
-            "congestion": true
-        }
+			"uplinkCapacity": 100,
+			"downlinkCapacity": 100,
+			"congestion": true
+		}
 	}
 }
